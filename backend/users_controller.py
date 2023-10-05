@@ -1,27 +1,40 @@
 # from typing import Annotated
 from fastapi_utils.cbv import cbv
 from fastapi_utils.inferring_router import InferringRouter
-from fastapi import Request, HTTPException, status
+from fastapi import HTTPException, status
 from fastapi.responses import RedirectResponse
+import requests
+
+
+GITHUB_TOKEN_ENDPOINT = "https://github.com/login/oauth/access_token"
+CLIENT_ID = "5b65a4ee4e9e984f6c1a"
+CLIENT_SECRET = "11a4beac2fa8c67e23a91da5bcb2d907914413bd"
+
+
+async def get_github_access_token(code: str):
+    url_path = (f"{GITHUB_TOKEN_ENDPOINT}?client_id={CLIENT_ID}"
+                f"&client_secret={CLIENT_SECRET}&code={code}")
+    headers = {
+        "Accept": "application/json"
+    }
+    response = requests.request(method="POST", url=url_path, headers=headers)
+
+    try:
+        data = response.json()
+    except requests.exceptions.JSONDecodeError:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+
+    return data
 
 
 router = InferringRouter()
 
 
-async def get_model(request: Request):
-    return request.app.state.model
-
-
 @cbv(router)
 class UsersController:
-    @router.get("/hello_world")
-    def hello_world(self):
-        return "Hello World from UsersController"
-
     @router.get("/login")
-    async def login(self, code: str | None = None):
-        if code is None:
-            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
-                                detail="Code not provided")
+    async def login(self, code: str):
+        data = await get_github_access_token(code)
 
-        return RedirectResponse(f"http://localhost:3000?code={code}")
+        print("DEBUG:", data)
+        return RedirectResponse("http://localhost:3000")
