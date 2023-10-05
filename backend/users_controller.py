@@ -55,12 +55,10 @@ router = InferringRouter()
 
 @cbv(router)
 class UsersController:
-    @router.get("/github_login")
-    async def github_login(self, code: str, request: Request):
+    @router.get("/get_github_token")
+    async def get_github_token(self, code: str, request: Request):
         token = await get_github_access_token(code)
-        user_data = await get_github_user_data(token)
-
-        logging.debug(token)
-        logging.debug(user_data)
-
-        return RedirectResponse(request.headers["referer"])
+        response = RedirectResponse(request.headers["referer"])
+        response.set_cookie(key="access_token",
+                            value=token)
+        return response
