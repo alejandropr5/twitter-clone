@@ -11,6 +11,7 @@ python = ">3.9,<3.12"
 uvicorn = "^0.23.2"
 fastapi = "^0.103.2"
 fastapi-utils = "^0.2.1"
+requests = "^2.31.0"
 
 
 [build-system]
