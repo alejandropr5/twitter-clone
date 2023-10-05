@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "twitter-clone-api"
+version = "0.1.0"
+description = ""
+authors = ["alejandropr05 <alejandropr05@hotmail.com>"]
+readme = "README.md"
+packages = [{include = "twitter_clone_api"}]
+
+[tool.poetry.dependencies]
+python = ">3.9,<3.12"
+uvicorn = "^0.23.2"
+fastapi = "^0.103.2"
+fastapi-utils = "^0.2.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
