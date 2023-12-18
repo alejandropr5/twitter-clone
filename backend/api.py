@@ -1,8 +1,8 @@
 import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from github_controller import router as github_router
-from users_controller import router as users_router
+from routers.github_controller import router as github_router
+from routers.users_controller import router as users_router
 
 HOMEPAGE_URL = os.environ.get("HOMEPAGE_URL", "http://127.0.0.1:3000")
 

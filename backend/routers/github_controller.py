@@ -8,7 +8,7 @@ import requests
 import logging
 
 logging.basicConfig(level=logging.DEBUG,
-                    format="%(levelname)s:\t\t%(message)s")
+                    format="%(levelname)s:\t%(message)s")
 
 
 class GitHubAPI():
@@ -57,7 +57,7 @@ class GitHubController:
         token = await self.get_access_token(code)
         response = RedirectResponse(state)
         response.set_cookie(key="access_token",
-                            value=token,
+                            value=token["access_token"],
                             httponly=True,
                             max_age=self.hours(8))
         return response
@@ -69,17 +69,6 @@ class GitHubController:
         logging.debug(f"HEADERS: {request.headers}")
         logging.debug(f"access_token: {access_token}")
         return {"response": "received"}
-
-    @router.get("/session")
-    async def session(self, access_token: CookieParam = None):
-        if access_token is None:
-            session = False
-        else:
-            session = True
-
-        logging.debug(f"session: {session}")
-
-        return {"session": session}
 
     @staticmethod
     async def get_access_token(code: str) -> dict:
