@@ -1,5 +1,5 @@
 import { AuthButton } from '../client/auth-button-client'
-import { GetSession } from './helpers/users-auth'
+import { GetSession } from '../../../helpers/users-auth'
 import { cookies } from 'next/headers'
 
 export async function AuthButtonServer () {

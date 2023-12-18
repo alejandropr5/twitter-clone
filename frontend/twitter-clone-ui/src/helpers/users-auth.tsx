@@ -1,5 +1,6 @@
 import { type ReadonlyRequestCookies } from 'next/dist/server/web/spec-extension/adapters/request-cookies'
 import fetch from 'node-fetch'
+
 const API_URL = 'http://127.0.0.1:8080'
 const SESSION_PATH = '/users/session'
 
