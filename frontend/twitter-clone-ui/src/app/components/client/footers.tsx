@@ -26,7 +26,7 @@ export function LoginFooter () {
     <footer className="px-4 py-3">
         <ul className="flex flex-wrap content-center justify-center text-[#516470] dark:text-[#70767b] text-[10pt]">
             <LiCustom>
-                <LinkLabel linkUrl="">Information</LinkLabel>
+                <LinkLabel linkUrl="">About</LinkLabel>
             </LiCustom>
             <LiCustom>
                 <LinkLabel linkUrl="">Download the X app</LinkLabel>
@@ -47,7 +47,7 @@ export function LoginFooter () {
             <LinkLabel linkUrl="">Accessibility</LinkLabel>
             </LiCustom>
             <LiCustom>
-                <LinkLabel linkUrl="">Ad Information</LinkLabel>
+                <LinkLabel linkUrl="">Ads Info</LinkLabel>
             </LiCustom>
             <LiCustom>
                 <LinkLabel linkUrl="">Blog</LinkLabel>
@@ -56,7 +56,7 @@ export function LoginFooter () {
                 <LinkLabel linkUrl="">Status</LinkLabel>
             </LiCustom>
             <LiCustom>
-                <LinkLabel linkUrl="">Jobs</LinkLabel>
+                <LinkLabel linkUrl="">Careers</LinkLabel>
             </LiCustom>
             <LiCustom>
                 <LinkLabel linkUrl="">Brand Resources</LinkLabel>
@@ -68,16 +68,16 @@ export function LoginFooter () {
                 <LinkLabel linkUrl="">Marketing</LinkLabel>
             </LiCustom>
             <LiCustom>
-                <LinkLabel linkUrl="">X for companies</LinkLabel>
+                <LinkLabel linkUrl="">X for Business</LinkLabel>
             </LiCustom>
             <LiCustom>
                 <LinkLabel linkUrl="">Developers</LinkLabel>
             </LiCustom>
             <LiCustom>
-                <LinkLabel linkUrl="">Guide</LinkLabel>
+                <LinkLabel linkUrl="">Directory</LinkLabel>
             </LiCustom>
             <LiCustom>
-                <LinkLabel linkUrl="">Configuration</LinkLabel>
+                <LinkLabel linkUrl="">Settings</LinkLabel>
             </LiCustom>
             <LiCustom>
                 <LinkLabel linkUrl="">© 2023 X Corp.</LinkLabel>
