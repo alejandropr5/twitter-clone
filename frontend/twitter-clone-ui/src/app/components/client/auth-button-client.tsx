@@ -39,17 +39,12 @@ export function AuthButton ({ session }: { session: boolean | false }) {
 }
 
 export function CreateAccountButton () {
-  const handleSignUp = async () => {
-    window.location.assign(API_URL + GITHUB_AUTH_PATH)
-  }
   return (
-    <header>
-      {
-        <RegularSignUpButton onClick={handleSignUp}>
-          Create Account
-        </RegularSignUpButton>
-      }
-    </header>
+    <>
+      <RegularSignUpButton>
+        Create Account
+      </RegularSignUpButton>
+    </>
   )
 }
 
@@ -58,13 +53,9 @@ export function SignInButton () {
     window.location.assign(API_URL + GITHUB_AUTH_PATH)
   }
   return (
-    <header>
-      {
         <RegularSignInButton onClick={handleSignUp}>
           Sign in
         </RegularSignInButton>
-      }
-    </header>
   )
 }
 
@@ -72,12 +63,8 @@ export function GoogleButton () {
   const handleSignUp = async () => {
   }
   return (
-    <header>
-      {
         <GoogleSignButton onClick={handleSignUp}>
           Sign up with Google
         </GoogleSignButton>
-      }
-    </header>
   )
 }
