@@ -4,7 +4,6 @@ version = "0.1.0"
 description = ""
 authors = ["alejandropr05 <alejandropr05@hotmail.com>"]
 readme = "README.md"
-packages = [{include = "twitter_clone_api"}]
 
 [tool.poetry.dependencies]
 python = ">3.9,<3.12"
@@ -12,6 +11,8 @@ uvicorn = "^0.23.2"
 fastapi = "^0.103.2"
 fastapi-utils = "^0.2.1"
 requests = "^2.31.0"
+sqlalchemy = "1.4.49"
+psycopg2-binary = "^2.9.9"
 
 
 [build-system]
