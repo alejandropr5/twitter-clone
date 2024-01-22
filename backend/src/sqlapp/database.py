@@ -5,7 +5,7 @@ import os
 
 DATABASE_URL = os.environ.get(
     "DATABASE_URL",
-    "postgresql://postgres:991005@127.0.0.1:5434/twitter-postgres"
+    "postgresql://postgres:991005@127.0.0.1:5434/twitter-postgres",
 )
 
 engine = create_engine(

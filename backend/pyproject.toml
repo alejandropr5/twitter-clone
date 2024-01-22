@@ -13,8 +13,24 @@ fastapi-utils = "^0.2.1"
 requests = "^2.31.0"
 sqlalchemy = "1.4.49"
 psycopg2-binary = "^2.9.9"
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+python-multipart = "^0.0.6"
 
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.1.14"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 79
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+docstring-code-format = true
+docstring-code-line-length = 72
+exclude = ["missing-trailing-comma"]

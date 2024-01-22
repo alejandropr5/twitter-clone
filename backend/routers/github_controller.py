@@ -7,11 +7,10 @@ from pydantic import BaseModel
 import requests
 import logging
 
-logging.basicConfig(level=logging.DEBUG,
-                    format="%(levelname)s:\t%(message)s")
+logging.basicConfig(level=logging.DEBUG, format="%(levelname)s:\t%(message)s")
 
 
-class GitHubAPI():
+class GitHubAPI:
     AUTH_ENDPOINT = "https://github.com/login/oauth/authorize"
     TOKEN_ENDPOINT = "https://github.com/login/oauth/access_token"
     USER_ENDPOINT = "https://api.github.com/user"
@@ -36,30 +35,39 @@ router = InferringRouter()
 class GitHubController:
     @router.get("/authorize")
     async def authorize(self, referer: HeaderParam = None):
-        auth_url = (f"{GitHubAPI.AUTH_ENDPOINT}"
-                    f"?client_id={GitHubAPI.CLIENT_ID}"
-                    f"&state={referer}")
+        auth_url = (
+            f"{GitHubAPI.AUTH_ENDPOINT}"
+            f"?client_id={GitHubAPI.CLIENT_ID}"
+            f"&state={referer}"
+        )
 
         return RedirectResponse(auth_url)
 
     @router.get("/access_token")
-    async def access_token(self,
-                           code: str | None = None,
-                           state: str | None = None,
-                           error: str | None = None,
-                           error_description: str | None = None,
-                           error_uri: str | None = None):
+    async def access_token(
+        self,
+        code: str | None = None,
+        state: str | None = None,
+        error: str | None = None,
+        error_description: str | None = None,
+        error_uri: str | None = None,
+    ):
         if error is not None:
-            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
-                                detail=(f"{error}: {error_description}."
-                                        f"More info: {error_uri}"))
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=(
+                    f"{error}: {error_description}." f"More info: {error_uri}"
+                ),
+            )
 
         token = await self.get_access_token(code)
         response = RedirectResponse(state)
-        response.set_cookie(key="access_token",
-                            value=token["access_token"],
-                            httponly=True,
-                            max_age=self.hours(8))
+        response.set_cookie(
+            key="access_token",
+            value=token["access_token"],
+            httponly=True,
+            max_age=self.hours(8),
+        )
         return response
 
     @router.get("/user_info")
@@ -72,16 +80,16 @@ class GitHubController:
 
     @staticmethod
     async def get_access_token(code: str) -> dict:
-        url_path = (f"{GitHubAPI.TOKEN_ENDPOINT}"
-                    f"?client_id={GitHubAPI.CLIENT_ID}"
-                    f"&client_secret={GitHubAPI.CLIENT_SECRET}"
-                    f"&code={code}")
-        headers = {
-            "Accept": "application/json"
-        }
-        response = requests.request(method="POST",
-                                    url=url_path,
-                                    headers=headers)
+        url_path = (
+            f"{GitHubAPI.TOKEN_ENDPOINT}"
+            f"?client_id={GitHubAPI.CLIENT_ID}"
+            f"&client_secret={GitHubAPI.CLIENT_SECRET}"
+            f"&code={code}"
+        )
+        headers = {"Accept": "application/json"}
+        response = requests.request(
+            method="POST", url=url_path, headers=headers
+        )
         try:
             data = response.json()
         except requests.exceptions.JSONDecodeError:
@@ -94,9 +102,9 @@ class GitHubController:
         headers = {
             "Authorization": f"{token['token_type']} {token['access_token']}"
         }
-        response = requests.request(method="GET",
-                                    url=GitHubAPI.USER_ENDPOINT,
-                                    headers=headers)
+        response = requests.request(
+            method="GET", url=GitHubAPI.USER_ENDPOINT, headers=headers
+        )
         # try:
         data = response.json()
         # except requests.exceptions.JSONDecodeError:
